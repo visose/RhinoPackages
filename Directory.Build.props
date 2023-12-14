@@ -1,0 +1,18 @@
+<Project>
+
+  <PropertyGroup>
+    <Product>RhinoPackages</Product>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AnalysisLevel>latest</AnalysisLevel>
+
+    <RootDir>$(MSBuildThisFileDirectory)</RootDir>
+    <ArtifactsPath>$(RootDir)artifacts</ArtifactsPath>
+  </PropertyGroup>
+
+</Project>

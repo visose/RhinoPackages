@@ -1,0 +1,18 @@
+.DS_Store
+
+# web
+node_modules/
+*.local
+
+out/
+.next/
+next-env.d.ts
+
+.vscode/
+!.vscode/extensions.json
+
+# dotnet
+artifacts/
+.vs/
+*.csproj.user
+local.settings.json

@@ -1,0 +1,26 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 100
+
+[*.{csproj,props,json,yml}]
+indent_size = 2
+
+[*.{html,css}]
+indent_size = 2
+
+[*.{js,ts,tsx}]
+indent_size = 2
+
+[*.cs]
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_namespace_declarations = file_scoped
+csharp_prefer_braces = when_multiline:warning
+dotnet_diagnostic.CA1725.severity = suggestion
+dotnet_diagnostic.CA1805.severity = suggestion
+dotnet_diagnostic.CA1823.severity = warning
