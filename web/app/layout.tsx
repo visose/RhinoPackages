@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import Image from "next/image";
 import "./globals.css";
-import { Spinner } from "./_components/Spinner";
+import Spinner from "./_components/Spinner";
 
 export const metadata: Metadata = {
   title: "Rhino Packages",

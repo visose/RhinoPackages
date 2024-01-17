@@ -4,7 +4,8 @@ import { Switch } from "@headlessui/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { Filters } from "@/app/_components/api";
 import { defaultParams, usePackageContext } from "./PackageContext";
-import { Spinner } from "./Spinner";
+import Spinner from "./Spinner";
+import OwnersControl from "./OwnersControl";
 
 export default function Sidebar() {
   const { navigate, status } = usePackageContext();
@@ -15,14 +16,16 @@ export default function Sidebar() {
       className="flex w-[10rem] flex-shrink-0 flex-col items-end gap-2"
     >
       <SearchBar />
+      <OwnersControl />
       <Sort />
+      <Spacer />
       <CheckBox title="Windows" icon="/icons/win.svg" filter={Filters.Windows} />
       <CheckBox title="Mac" icon="/icons/mac.svg" filter={Filters.Mac} />
-      <hr className="my-4 h-px w-full bg-gray-200" />
+      <Spacer />
       <CheckBox title="Rhino 6" icon="/icons/rhino6.png" filter={Filters.Rhino6} />
       <CheckBox title="Rhino 7" icon="/icons/rhino7.png" filter={Filters.Rhino7} />
       <CheckBox title="Rhino 8" icon="/icons/rhino8.png" filter={Filters.Rhino8} />
-      <hr className="my-4 h-px w-full bg-gray-200" />
+      <Spacer />
       <CheckBox title="Rhino plugin" icon="/icons/rhp.png" filter={Filters.Rhino} />
       <CheckBox title="Grasshopper" icon="/icons/gha.png" filter={Filters.Grasshopper} />
       <button
@@ -38,6 +41,10 @@ export default function Sidebar() {
       </div>
     </form>
   );
+}
+
+function Spacer() {
+  return <hr className="my-4 h-px w-full bg-gray-200" />;
 }
 
 interface CheckProps {
@@ -94,7 +101,7 @@ function SearchBar() {
   const { controls, setSearch } = usePackageContext();
 
   return (
-    <div className="flex rounded-md shadow-sm">
+    <div className="flex rounded-md">
       <input
         type="text"
         value={controls.search}
@@ -105,7 +112,7 @@ function SearchBar() {
         type="submit"
         className="relative -ml-px rounded-r-md px-3 ring-1 ring-inset ring-gray-300 hover:bg-gray-100"
       >
-        <MagnifyingGlassIcon className="h-4 w-4 text-gray-400" aria-hidden="true" />
+        <MagnifyingGlassIcon className="h-4 w-4 text-gray-500" aria-hidden="true" />
       </button>
     </div>
   );
@@ -115,9 +122,9 @@ function Sort() {
   const { navigate, controls } = usePackageContext();
 
   return (
-    <div className="mb-6 flex w-full flex-col">
+    <div className="flex w-full flex-col">
       <select
-        className="rounded-md border-0 py-1.5 pl-3 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-gray-400"
+        className=" rounded-md border-0 py-1.5 pl-3 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-400"
         value={controls.sort}
         onChange={(e) => navigate({ sort: Number(e.target.value) })}
       >

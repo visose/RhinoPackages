@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Filters, Package, Status, has, pageResults, useApi } from "./api";
+import { Filters, Owner, Package, Status, has, pageResults, useApi } from "./api";
 
 export enum Sort {
   Downloads,
@@ -25,6 +25,7 @@ export const defaultParams: Params = {
 
 interface PackageContext {
   packages: Package[];
+  owners: Owner[];
   status: Status;
   controls: Params;
   navigate: (value: { [Key in keyof Params]?: Params[Key] }) => void;
@@ -65,10 +66,25 @@ export function PackageProvider({ children }: { children: React.ReactNode }) {
     return filter(cache ?? [], params);
   }, [cache, searchParams]);
 
+  const owners = useMemo(() => {
+    const set = new Set<number>();
+    const owners: Owner[] = [];
+
+    for (const pkg of cache) {
+      for (const owner of pkg.owners) {
+        if (set.has(owner.id)) continue;
+        set.add(owner.id);
+        owners.push(owner);
+      }
+    }
+    return owners.sort((a, b) => a.id - b.id);
+  }, [cache]);
+
   return (
     <PackageContext.Provider
       value={{
         packages,
+        owners,
         status,
         controls,
         navigate,
